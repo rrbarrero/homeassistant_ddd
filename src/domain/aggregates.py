@@ -50,3 +50,8 @@ class CurrentState(Aggregate):
     @classmethod
     def create(cls, exceedance: watios, devices_state: list[Device]) -> Self:
         return cls(exceedance, devices_state)
+
+
+@dataclass
+class DeviceChangedState(Aggregate):
+    device: Device

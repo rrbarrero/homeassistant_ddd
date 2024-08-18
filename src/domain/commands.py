@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+from domain.aggregates import CurrentState
+
 
 class Command:
     pass
@@ -8,3 +10,7 @@ class Command:
 @dataclass
 class ReadRemoteStateCommand(Command):
     endpoint: str
+
+@dataclass
+class CheckDevicesCommand(Command):
+    current_state: CurrentState
