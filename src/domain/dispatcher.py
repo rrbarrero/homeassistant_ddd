@@ -47,7 +47,7 @@ class InMemoryCommandDispatcher:
 
 
 class InMemoryCommandDispatcherBuilder:
-    def __init__(self):
+    def __init__(self) -> None:
         self.command_handlers: dict[Type[Command], CommandHandler] = {}
         self.projection_handlers: dict[Type[Event], ProjectionHandler] = {}
         self.policies: dict[Type[Event], list[PolicyHandler]] = {}

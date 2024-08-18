@@ -13,7 +13,7 @@ class Aggregate:
 
 TemperatureBoundaries = tuple[degrees, degrees]
 
-@dataclass
+@dataclass(frozen=True)
 class Device:
     entity_id: str
     state: bool
@@ -42,7 +42,7 @@ class Device:
         )
 
 
-@dataclass
+@dataclass(frozen=True)
 class CurrentState(Aggregate):
     exceedance: watios
     devices_state: list[Device]
@@ -52,6 +52,6 @@ class CurrentState(Aggregate):
         return cls(exceedance, devices_state)
 
 
-@dataclass
+@dataclass(frozen=True)
 class DeviceChangedState(Aggregate):
     device: Device

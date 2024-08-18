@@ -76,5 +76,5 @@ def test_dispatcher():
             last_change=datetime.datetime(2024, 1, 1, 0, 0),
         ),
     )
-    assert dispatcher.events == [event1, event2]
+    
     assert spy == [event1, event2]

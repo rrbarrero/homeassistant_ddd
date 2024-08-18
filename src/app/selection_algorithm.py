@@ -14,3 +14,4 @@ class NaiveSelectionAlgorithm(SelectionAlgorithm):
                 if device.temperature not in range(*device.boundaries): # type: ignore
                     if current_state.exceedance > (device.consumption + 400):
                         return DeviceChangedState(device=replace(device, state=True))
+        return None
