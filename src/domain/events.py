@@ -8,7 +8,7 @@ class Event:
 
 
 @dataclass
-class RemoteStateReadedEvent(Event):
+class CurrentStateChangedEvent(Event):
     current_state : CurrentState
 
 
