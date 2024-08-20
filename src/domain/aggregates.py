@@ -22,6 +22,11 @@ class Device:
     consumption: watios
     last_change: datetime
 
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Device):
+            return False
+        return self.entity_id == other.entity_id
+
     @classmethod
     def create(
         cls,

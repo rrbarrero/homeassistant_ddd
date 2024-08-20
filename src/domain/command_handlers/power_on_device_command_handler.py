@@ -1,4 +1,4 @@
-from domain.aggregates import CurrentState
+from domain.aggregates import CurrentState, Device
 from domain.command_handlers.common import CommandHandler
 from domain.commands import PowerOnDeviceCommand
 from domain.events import CurrentStateChangedEvent
@@ -11,12 +11,21 @@ class PowerOnDeviceCommandHanlder(CommandHandler):
 
     def handle(self, command: PowerOnDeviceCommand) -> CurrentStateChangedEvent:
         self.repo.change_device_state(device_state=command.device_to_change)
-        devices_updated = []
-        for device in command.current_state.devices_state:
-            if device.entity_id == command.device_to_change.entity_id:
-                devices_updated.append(command.device_to_change)
-            else:
-                devices_updated.append(device)
+
+        return CurrentStateChangedEvent(
+            current_state=CurrentState.create(
+                exceedance=self._update_exceedance(command=command),
+                devices_state=self._update_devices_state(command=command),
+            ),
+        )
+    
+    def _update_devices_state(self, command: PowerOnDeviceCommand) -> list[Device]:
+        return [
+            device if device != command.device_to_change else command.device_to_change
+            for device in command.current_state.devices_state
+        ]
+
+    def _update_exceedance(self, command: PowerOnDeviceCommand) -> float:
         updated_exceedance: float = (
             command.current_state.exceedance - command.device_to_change.consumption
         )
@@ -24,8 +33,4 @@ class PowerOnDeviceCommandHanlder(CommandHandler):
             updated_exceedance = (
                 command.current_state.exceedance + command.current_state.exceedance
             )
-        return CurrentStateChangedEvent(
-            current_state=CurrentState.create(
-                exceedance=updated_exceedance, devices_state=devices_updated
-            ),
-        )
+        return updated_exceedance
