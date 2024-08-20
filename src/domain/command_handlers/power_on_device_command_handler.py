@@ -26,11 +26,8 @@ class PowerOnDeviceCommandHanlder(CommandHandler):
         ]
 
     def _update_exceedance(self, command: PowerOnDeviceCommand) -> float:
-        updated_exceedance: float = (
-            command.current_state.exceedance - command.device_to_change.consumption
-        )
-        if not command.device_to_change.state:
-            updated_exceedance = (
-                command.current_state.exceedance + command.current_state.exceedance
-            )
-        return updated_exceedance
+        exceedance_delta: float = (-command.device_to_change.consumption 
+                        if command.device_to_change.state 
+                        else command.current_state.exceedance)
+    
+        return command.current_state.exceedance + exceedance_delta
