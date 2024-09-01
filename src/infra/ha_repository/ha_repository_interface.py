@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from domain.aggregates import Device
+from domain.entities import Device
 from domain.events import CurrentStateChangedEvent
 
 

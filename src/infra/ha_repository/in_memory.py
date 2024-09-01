@@ -1,5 +1,5 @@
 import datetime
-from domain.aggregates import CurrentState, Device
+from domain.entities import CurrentState, CurrentStateStatus, Device
 from domain.events import CurrentStateChangedEvent
 from infra.ha_repository.ha_repository_interface import HaRepository
 
@@ -38,9 +38,10 @@ DEVICE_DD: Device = Device.create(
     last_change=DATE_AA,
 )
 
-CURRENT_STATE_AA: CurrentState = CurrentState.create(
+CURRENT_STATE_AA: CurrentState = CurrentState.new(
     exceedance=2000,
     devices_state=[DEVICE_AA, DEVICE_BB, DEVICE_CC, DEVICE_DD],
+    status=CurrentStateStatus.REMOTE_READED,
 )
 
 

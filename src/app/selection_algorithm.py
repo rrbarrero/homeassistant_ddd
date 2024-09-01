@@ -1,5 +1,5 @@
 from dataclasses import replace
-from domain.aggregates import CurrentState, Device
+from domain.entities import CurrentState, Device
 
 
 class SelectionAlgorithm:

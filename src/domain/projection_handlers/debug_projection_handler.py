@@ -1,5 +1,6 @@
+from domain.ddd import ProjectionHandler
 from domain.events import Event
-from domain.projection_handlers.common import ProjectionHandler
+
 
 
 class DebugProjectionHandler(ProjectionHandler):

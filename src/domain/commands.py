@@ -1,10 +1,7 @@
 from dataclasses import dataclass
 
-from domain.aggregates import CurrentState, Device
-
-
-class Command:
-    pass
+from domain.ddd import Command
+from domain.entities import CurrentState, Device
 
 
 @dataclass

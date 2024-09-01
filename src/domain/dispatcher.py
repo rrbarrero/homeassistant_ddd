@@ -1,11 +1,10 @@
 from typing import Type
 from typing_extensions import Self
 
-from domain.command_handlers.common import CommandHandler
+
 from domain.commands import Command
+from domain.ddd import CommandHandler, PolicyHandler, ProjectionHandler
 from domain.events import Event
-from domain.policy_handlers.common import PolicyHandler
-from domain.projection_handlers.common import ProjectionHandler
 
 
 class InMemoryCommandDispatcher:
@@ -40,7 +39,6 @@ class InMemoryCommandDispatcher:
                 if new_command:
                     self.commands.append(new_command)
 
-
         for event in self.events:
             event_handler: ProjectionHandler = self.projection_handlers[type(event)]
             event_handler.handle(event=event)
@@ -57,7 +55,6 @@ class InMemoryCommandDispatcherBuilder:
     ) -> Self:
         self.command_handlers[command_type] = handler
         return self
-
 
     def with_policy_handler(self, event_type, policy) -> Self:
         if event_type not in self.policies:

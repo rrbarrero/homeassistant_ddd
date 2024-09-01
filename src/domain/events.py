@@ -1,18 +1,15 @@
 from dataclasses import dataclass
 
-from domain.aggregates import CurrentState, Device
-
-
-class Event:
-    pass
+from domain.ddd import Event
+from domain.entities import CurrentState, Device
 
 
 @dataclass
 class CurrentStateChangedEvent(Event):
-    current_state : CurrentState
+    current_state: CurrentState
 
 
 @dataclass
 class DevicesCheckedEvent(Event):
-    current_state : CurrentState
+    current_state: CurrentState
     device_changed: Device | None
