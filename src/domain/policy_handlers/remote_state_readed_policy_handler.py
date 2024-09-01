@@ -9,6 +9,6 @@ class RemoteStateReadedPolicyHandler(PolicyHandler):
         state: CurrentState = CurrentState.new(
             exceedance=event.current_state.exceedance,
             devices_state=event.current_state.devices_state,
-            status=CurrentStateStatus.DEVICE_CHECK,
+            status=CurrentStateStatus.MANAGED_DEVICE,
         )
         return CheckDevicesCommand(current_state=state)

@@ -15,11 +15,7 @@ class DevicesCheckedPolicyHandler(PolicyHandler):
             state: CurrentState = CurrentState.new(
                 exceedance=event.current_state.exceedance,
                 devices_state=event.current_state.devices_state,
-                status=(
-                    CurrentStateStatus.POWER_OFF
-                    if isinstance(command, PowerOffDeviceCommand)
-                    else CurrentStateStatus.POWER_ON
-                ),
+                status=CurrentStateStatus.STATE_RECALCULATED,
             )
             return command(
                 current_state=state,

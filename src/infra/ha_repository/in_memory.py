@@ -41,7 +41,7 @@ DEVICE_DD: Device = Device.create(
 CURRENT_STATE_AA: CurrentState = CurrentState.new(
     exceedance=2000,
     devices_state=[DEVICE_AA, DEVICE_BB, DEVICE_CC, DEVICE_DD],
-    status=CurrentStateStatus.REMOTE_READED,
+    status=CurrentStateStatus.REMOTE_READ,
 )
 
 

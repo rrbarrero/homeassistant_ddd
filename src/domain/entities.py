@@ -53,10 +53,9 @@ class CurrentStateId(AggregateId):
 
 
 class CurrentStateStatus(Enum):
-    POWER_ON = "POWER_ON"
-    POWER_OFF = "POWER_OFF"
-    DEVICE_CHECK = "DEVICE_CHECK"
-    REMOTE_READED = "REMOTE_READED"
+    STATE_RECALCULATED = "STATE_RECALCULATED"
+    MANAGED_DEVICE = "MANAGED_DEVICE"
+    REMOTE_READ = "REMOTE_READ"
 
 
 class CurrentState(Aggregate):
@@ -102,5 +101,5 @@ class CurrentState(Aggregate):
             version=current_state.version,
             exceedance=current_state.exceedance,
             devices_state=devices_update,
-            status=CurrentStateStatus.DEVICE_CHECK,
+            status=CurrentStateStatus.MANAGED_DEVICE,
         )

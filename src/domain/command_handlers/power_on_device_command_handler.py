@@ -18,7 +18,7 @@ class PowerOnDeviceCommandHanlder(CommandHandler):
         new_state: CurrentState = CurrentState.new(
             exceedance=self._update_exceedance(command=command),
             devices_state=self._update_devices_state(command=command),
-            status=CurrentStateStatus.POWER_ON,
+            status=CurrentStateStatus.STATE_RECALCULATED,
         )
         self.aggregate_repo.save(aggregate=new_state)
 
